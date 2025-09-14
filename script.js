@@ -1,8 +1,3 @@
-import { GoogleGenerativeAI } from "https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/index.min.js";
-// Sử dụng thư viện đã nạp từ CDN
-const { createFFmpeg, fetchFile } = FFmpeg;
-// const { GoogleGenerativeAI } = genai; // <<<<<<< XÓA HOẶC COMMENT DÒNG NÀY LẠI
-
 // Lấy các element từ DOM
 const videoFileInput = document.getElementById('video-file');
 const startBtn = document.getElementById('start-btn');
@@ -13,6 +8,9 @@ const downloadLink = document.getElementById('download-link');
 
 // Biến toàn cục để lưu cấu hình
 let config = {};
+
+// Sử dụng biến toàn cục FFmpeg do thư viện tạo ra
+const { createFFmpeg, fetchFile } = FFmpeg;
 
 // Khởi tạo FFmpeg
 const ffmpeg = createFFmpeg({
@@ -44,8 +42,8 @@ async function generateCaptionFromVideo(videoFile, apiKey) {
     log("\n--- BƯỚC 1: Đang tạo caption bằng Google Gemini ---");
     if (!apiKey) throw new Error("Không tìm thấy Google Gemini API Key trong file config.json.");
     
-    // SỬA LỖI Ở ĐÂY: Sử dụng genai.GoogleGenerativeAI thay vì GoogleGenerativeAI
-    const genAI = new GoogleGenerativeAI(apiKey); // <<<<<<< THAY ĐỔI Ở ĐÂY
+    // Sử dụng biến toàn cục "genai" do thư viện tạo ra
+    const genAI = new genai.GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const fileToGenerativePart = async (file) => {
@@ -115,13 +113,11 @@ async function combineVideoWithFFmpeg(videoFile, audioBlob, captionText, overlay
     ffmpeg.FS('writeFile', 'font.otf', await fetchFile(fontFile));
     
     log("Lấy thông tin media...");
-    // Chạy một lệnh đơn giản để ffprobe phân tích các file đầu vào
     await ffmpeg.run('-i', 'input.mp4', '-i', 'tts.wav');
     const infoLog = logOutput.textContent;
     
-    // Phân tích log để lấy thông tin. Cách này hơi thủ công nhưng hiệu quả.
     const durationMatches = infoLog.match(/Duration: (\d{2}):(\d{2}):(\d{2}\.\d{2})/g);
-    const audioDurationStr = durationMatches[1]; // Lấy duration của file thứ 2 (audio)
+    const audioDurationStr = durationMatches[1];
     const parts = audioDurationStr.match(/(\d{2}):(\d{2}):(\d{2}\.\d{2})/);
     const tts_duration = parseFloat(parts[1]) * 3600 + parseFloat(parts[2]) * 60 + parseFloat(parts[3]);
     
@@ -215,7 +211,7 @@ async function startProcessing() {
     } catch (error) {
         log(`\n--- LỖI NGHIÊM TRỌNG ---`);
         log(error.message);
-        console.error(error); // In lỗi chi tiết ra console để debug
+        console.error(error);
         setStatus(`Đã xảy ra lỗi. Xem console (F12) để biết chi tiết.`);
     } finally {
         startBtn.disabled = false;

@@ -40,8 +40,9 @@
 
     <!-- Nạp các thư viện JS cần thiết -->
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
-    <!-- Thay đổi ở đây: sử dụng phiên bản esm và type="module" -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/index.min.js"></script>
-    <script type="module" src="script.js"></script>
+    <script src="https://unpkg.com/@google/generative-ai@0.1.3/dist/index.js"></script>
+    
+    <!-- defer đảm bảo script này chỉ chạy sau khi các thư viện ở trên đã được tải và sẵn sàng -->
+    <script src="script.js" defer></script>
 </body>
 </html>
