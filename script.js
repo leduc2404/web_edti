@@ -1,3 +1,4 @@
+import { GoogleGenerativeAI } from "https://unpkg.com/@google/generative-ai@0.1.3/dist/index.esm.js";
 // Sử dụng thư viện đã nạp từ CDN
 const { createFFmpeg, fetchFile } = FFmpeg;
 // const { GoogleGenerativeAI } = genai; // <<<<<<< XÓA HOẶC COMMENT DÒNG NÀY LẠI
@@ -44,7 +45,7 @@ async function generateCaptionFromVideo(videoFile, apiKey) {
     if (!apiKey) throw new Error("Không tìm thấy Google Gemini API Key trong file config.json.");
     
     // SỬA LỖI Ở ĐÂY: Sử dụng genai.GoogleGenerativeAI thay vì GoogleGenerativeAI
-    const genAI = new genai.GoogleGenerativeAI(apiKey); // <<<<<<< THAY ĐỔI Ở ĐÂY
+    const genAI = new GoogleGenerativeAI(apiKey); // <<<<<<< THAY ĐỔI Ở ĐÂY
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const fileToGenerativePart = async (file) => {
