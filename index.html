@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Automation - Client Side</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍀 PHÁT LỘC - PHÁT TÀI 🍀</h1>
+            <p>Video Automation Tool (100% Client-Side)</p>
+        </header>
+
+        <!-- Tải lên Files -->
+        <div class="settings-group">
+            <h2>📁 Tải lên Video</h2>
+            <label for="video-file">Chọn video gốc (.mp4) để xử lý:</label>
+            <input type="file" id="video-file" accept="video/mp4">
+        </div>
+
+        <!-- Điều khiển và Log -->
+        <div class="control-section">
+            <button id="start-btn" disabled>▶ Tải cấu hình...</button>
+            <div id="status">Trạng thái: Đang chờ cấu hình...</div>
+        </div>
+
+        <div class="log-container">
+            <h2>Nhật ký xử lý (Log)</h2>
+            <pre id="log-output"></pre>
+        </div>
+        
+        <div id="result-section" class="hidden">
+            <h2>Hoàn thành!</h2>
+            <a id="download-link" class="download-button">Tải Video Về Máy</a>
+        </div>
+
+    </div>
+
+    <!-- Nạp các thư viện JS cần thiết -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+    <script src="https://unpkg.com/@google/generative-ai@0.1.3/dist/index.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

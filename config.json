@@ -1,0 +1,11 @@
+{
+    "api_keys": {
+        "google_gemini": "YOUR_GOOGLE_GEMINI_API_KEY",
+        "fpt_ai": "YOUR_FPT_AI_API_KEY"
+    },
+    "asset_paths": {
+        "overlay": "assets/bg.png",
+        "logo": "assets/logo.png",
+        "font": "assets/font.otf"
+    }
+}
