@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "https://unpkg.com/@google/generative-ai@0.1.3/dist/index.esm.js";
+import { GoogleGenerativeAI } from "https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/index.min.js";
 // Sử dụng thư viện đã nạp từ CDN
 const { createFFmpeg, fetchFile } = FFmpeg;
 // const { GoogleGenerativeAI } = genai; // <<<<<<< XÓA HOẶC COMMENT DÒNG NÀY LẠI
